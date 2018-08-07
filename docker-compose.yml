@@ -1,0 +1,17 @@
+db:
+  image: mysql:5.6
+  environment:
+    MYSQL_ROOT_PASSWORD: Qwerty@12345
+   
+    
+  ports:
+    - "3306:3306"
+  volumes:
+   - /root/Java-Mysql-Simple-Login-Web-application/mysql/sample.sql:/docker-entrypoint-initdb.d/sample.sql
+
+web:
+  image: login:latest
+  ports:
+   - "443:8080"
+  links:
+    - db
