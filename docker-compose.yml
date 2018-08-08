@@ -10,7 +10,7 @@ db:
    - /root/Java-Mysql-Simple-Login-Web-application/mysql/sample.sql:/docker-entrypoint-initdb.d/sample.sql
 
 web:
-  image: login:latest
+  build: ./
   ports:
    - "443:8080"
   links:
