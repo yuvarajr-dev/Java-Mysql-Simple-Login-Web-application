@@ -6,5 +6,6 @@ mysql:
    - 3306:3306
  volumes:
    - ./sample.sql:/docker-entrypoint-initdb.d/sample.sql 
-   - /sql:/var/lib/mysql 
+
+
 
