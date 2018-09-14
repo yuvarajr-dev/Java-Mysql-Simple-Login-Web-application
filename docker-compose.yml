@@ -9,6 +9,7 @@ db:
   volumes:
    - /root/Java-Mysql-Simple-Login-Web-application/mysql/sample.sql:/docker-entrypoint-initdb.d/sample.sql
    - /sql:/var/lib/mysql
+   - /tmp/Java-Mysql-Simple-Login-Web-application/dockerdemo.txt:/tmp/dockerdemo.txt
 web:
   build: ./
   ports:
