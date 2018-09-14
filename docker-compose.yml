@@ -15,7 +15,7 @@ web:
   ports:
    - "443:8080"
   volumes:
-   - /tmp/Java-Mysql-Simple-Login-Web-application/dockerdemo.txt:/tmp/dockerdemo.txt
+   - /tmp/Java-Mysql-Simple-Login-Web-application/dockerdemo.txt:/usr/local/tomcat/dockerdemo.txt
   links:
    - db
 
