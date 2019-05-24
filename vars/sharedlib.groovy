@@ -1,7 +1,7 @@
 def call(Map params) { 
 node('master') {
     stage('pull') {
-        checkout([$class: 'GitSCM', branches: [[name: '*/master']], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: 'https://github.com/Meghanakanakavidu/Java-Mysql-Simple-Login-Web-application.git']]])
+        checkout([$class: 'GitSCM', branches: [[name: params.branch ]], doGenerateSubmoduleConfigurations: false, extensions: [], submoduleCfg: [], userRemoteConfigs: [[url: params.giturl ]]])
     }
     stage('artifact details') {
         tool name: 'java', type: 'jdk'
@@ -10,7 +10,7 @@ node('master') {
 	    env.PATH = "${mvnHome}/bin:${env.PATH}"
         rtMavenDeployer (
           id: 'deployer-unique-id',
-          serverId: 'JFrog',
+          serverId: params.artifactid,
           releaseRepo: 'release/${BUILD_NUMBER}',
           snapshotRepo: "snapshot/${BUILD_NUMBER}"
         )
@@ -20,7 +20,7 @@ node('master') {
         
           rtMavenRun (
           tool: 'maven',
-	      type: 'maven',
+	  type: 'maven',
           pom: 'pom.xml',
           goals: 'clean install',
           opts: '-Xms1024m -Xmx4096m',
@@ -32,13 +32,13 @@ node('master') {
     stage('publish the artifact'){
         
           rtPublishBuildInfo (
-          serverId: "JFrog"
+          serverId: params.artifactid
           )
          
     }
     stage('sonar'){
         // def scannerHome = tool 'Sonar';
-        withSonarQubeEnv('sonar') {
+        withSonarQubeEnv(params.sonarid) {
          sh 'mvn clean install sonar:sonar'
        }  
     }
@@ -53,7 +53,7 @@ node('master') {
  }
     stage('Download artifact'){
         rtDownload (
-           serverId: "JFrog",
+           serverId: params.artifactid ,
            spec:
              """{
            "files": [
@@ -68,7 +68,7 @@ node('master') {
     stage('Copy'){
         sh 'mv /var/lib/jenkins/workspace/${JOB_NAME}/${BUILD_NUMBER}/com/javawebtutor/LoginWebApp/1.0-SNAPSHOT/*.war  /var/lib/jenkins/workspace/${JOB_NAME}/${BUILD_NUMBER}/com/javawebtutor/LoginWebApp/1.0-SNAPSHOT/loginwebapp.war'
          
-        sh 'scp -v -o StrictHostKeyChecking=no  /var/lib/jenkins/workspace/${JOB_NAME}/${BUILD_NUMBER}/com/javawebtutor/LoginWebApp/1.0-SNAPSHOT/*.war root@52.176.41.66:tomcat/webapps'    
+        sh 'scp -v -o StrictHostKeyChecking=no  /var/lib/jenkins/workspace/${JOB_NAME}/${BUILD_NUMBER}/com/javawebtutor/LoginWebApp/1.0-SNAPSHOT/*.war root@params.destip:tomcat/webapps'    
 
         
     }
