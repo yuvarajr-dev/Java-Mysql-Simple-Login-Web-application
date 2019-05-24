@@ -68,7 +68,7 @@ node('master') {
     stage('Copy'){
         sh 'mv /var/lib/jenkins/workspace/${JOB_NAME}/${BUILD_NUMBER}/com/javawebtutor/LoginWebApp/1.0-SNAPSHOT/*.war  /var/lib/jenkins/workspace/${JOB_NAME}/${BUILD_NUMBER}/com/javawebtutor/LoginWebApp/1.0-SNAPSHOT/loginwebapp.war'
          
-        sh 'scp -v -o StrictHostKeyChecking=no  /var/lib/jenkins/workspace/${JOB_NAME}/${BUILD_NUMBER}/com/javawebtutor/LoginWebApp/1.0-SNAPSHOT/*.war root@params.destip:tomcat/webapps'    
+        sh 'scp -v -o StrictHostKeyChecking=no  /var/lib/jenkins/workspace/${JOB_NAME}/${BUILD_NUMBER}/com/javawebtutor/LoginWebApp/1.0-SNAPSHOT/*.war root@'params.destip':tomcat/webapps'    
 
         
     }
