@@ -72,7 +72,12 @@ node('master') {
 
         
     }
-}    
+    }    
+    catch (err) {
+      mail body:"${err}", subject: 'Build Failed', to: params.email
+      currentBuild.result = 'FAILURE'
+      }
+
 }
 
 
