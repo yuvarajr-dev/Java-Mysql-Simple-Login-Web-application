@@ -12,8 +12,8 @@ node('master') {
         rtMavenDeployer (
           id: 'deployer-unique-id',
           serverId: params.artifactid,
-          releaseRepo: 'release/${BUILD_NUMBER}',
-          snapshotRepo: "snapshot/${BUILD_NUMBER}"
+          releaseRepo: 'example-repo-local/${BUILD_NUMBER}',
+          snapshotRepo: "example-repo-local/${BUILD_NUMBER}"
         )
 
     }
@@ -70,10 +70,8 @@ node('master') {
     stage('Copy'){
         sh 'mv /var/lib/jenkins/workspace/${JOB_NAME}/${BUILD_NUMBER}/com/javawebtutor/LoginWebApp/1.0-SNAPSHOT/*.war  /var/lib/jenkins/workspace/${JOB_NAME}/${BUILD_NUMBER}/com/javawebtutor/LoginWebApp/1.0-SNAPSHOT/loginwebapp.war'
 
-        sh 'scp -v -o StrictHostKeyChecking=no  /var/lib/jenkins/workspace/${JOB_NAME}/${BUILD_NUMBER}/com/javawebtutor/LoginWebApp/1.0-SNAPSHOT/*.war root@'+params.destip+':/home/ubuntu/'
-		
-
-
+        sh 'scp var/lib/jenkins/workspace/${JOB_NAME}/${BUILD_NUMBER}/com/javawebtutor/LoginWebApp/1.0-SNAPSHOT/*.war tomcat@'+params.destip+':/opt/apache-tomcat-7.0.94/webapps/'
+	
     }
     }
         }
@@ -83,4 +81,3 @@ node('master') {
       }
 
 }
-
