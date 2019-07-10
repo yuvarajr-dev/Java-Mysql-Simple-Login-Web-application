@@ -1,4 +1,4 @@
-def call(Map params) {
+def call(mylibrary) {
 try{
 node('master') {
     stage('pull') {
