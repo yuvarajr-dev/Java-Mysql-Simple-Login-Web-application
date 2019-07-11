@@ -10,8 +10,8 @@ node(label: 'master'){
     def pom = "pom.xml"
     def goal = "clean install"
     def artifactory = "Artifactory"
-    def releaseRepo = "example-repo-local"
-    def snapshotRepo = "example-repo-local"
+    def releaseRepo = "libs-release-local"
+    def snapshotRepo = "libs-snapshot-local"
     def lastSuccessfulBuildID = 0
 
     stage('Get Last Successful Build Number'){
