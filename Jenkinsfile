@@ -11,7 +11,7 @@ node(label: 'master'){
     def goal = "clean install"
     def artifactory = "Artifactory"
     def releaseRepo = "example-repo-local"
-    def snapshot = "example-repo-local"
+    def snapshotRepo = "example-repo-local"
     def lastSuccessfulBuildID = 0
 
     stage('Get Last Successful Build Number'){
