@@ -11,7 +11,7 @@ node(label: 'master'){
     def goal = "clean install"
     def artifactory = "Artifactory"
     def releaseRepo = "example-repo-local"
-    def snapshot = "example-snapshot-local"
+    def snapshot = "example-repo-local"
     def lastSuccessfulBuildID = 0
 
     stage('Get Last Successful Build Number'){
@@ -42,6 +42,6 @@ node(label: 'master'){
     
     //MVN Build
     stage('Maven Build and Push to Artifactory'){
-        mavenBuild "${artifactoryServer}","${mvnHome}","${pom}", "${goal}", "${releaseRepo}", "${snapshotRepo}"
+        mavenBuild "${artifactory}","${mvnHome}","${pom}", "${goal}", "${releaseRepo}", "${snapshotRepo}"
     }
 }

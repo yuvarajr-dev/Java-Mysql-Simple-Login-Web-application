@@ -1,7 +1,7 @@
 def call (def artifactoryServer, def mvnHome,def pom, def goal, def releaseRepo, def snapshotRepo){
   rtMavenDeployer (
       id: 'deployer-unique-id',
-      serverId: "${artifactoryServer}",
+      serverId: "${artifactory}",
       releaseRepo: "${releaseRepo}/${BUILD_NUMBER}",
       snapshotRepo: "${snapshotRepo}/${BUILD_NUMBER}"
   )
