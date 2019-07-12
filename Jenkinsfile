@@ -1,7 +1,7 @@
 @Library('shared-library')_
 node(label: 'master'){
     //Variables
-    def gitURL = "https://github.com/sameer-shukur/Java-Mysql-Simple-Login-Web-application.git"
+    def gitURL = "https://github.com/yuvarajr-dev/Java-Mysql-Simple-Login-Web-application.git"
     def repoBranch = "master"
     def applicationName = "WebApp"
     def sonarqubeServer = "sonar"
